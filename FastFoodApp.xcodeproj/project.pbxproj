@@ -18,7 +18,7 @@
 		7ADC62F0285A5EB000A95952 /* BurgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62EF285A5EB000A95952 /* BurgerView.swift */; };
 		7ADC62F2285A5EBC00A95952 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62F1285A5EBC00A95952 /* LocationView.swift */; };
 		7ADC62F4285A5EC800A95952 /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62F3285A5EC800A95952 /* BasketView.swift */; };
-		7ADC62F6285A5EEC00A95952 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62F5285A5EEC00A95952 /* AccountView.swift */; };
+		7ADC62F6285A5EEC00A95952 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62F5285A5EEC00A95952 /* AddressView.swift */; };
 		7ADC62F9285A5F1A00A95952 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC62F8285A5F1A00A95952 /* MapKit.framework */; };
 		7ADC62FE285A60E300A95952 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62FA285A60E300A95952 /* Product+CoreDataClass.swift */; };
 		7ADC62FF285A60E300A95952 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC62FB285A60E300A95952 /* Product+CoreDataProperties.swift */; };
@@ -39,7 +39,7 @@
 		7ADC62EF285A5EB000A95952 /* BurgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerView.swift; sourceTree = "<group>"; };
 		7ADC62F1285A5EBC00A95952 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		7ADC62F3285A5EC800A95952 /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
-		7ADC62F5285A5EEC00A95952 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		7ADC62F5285A5EEC00A95952 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		7ADC62F8285A5F1A00A95952 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7ADC62FA285A60E300A95952 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7ADC62FB285A60E300A95952 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				7ADC62EF285A5EB000A95952 /* BurgerView.swift */,
 				7ADC62F1285A5EBC00A95952 /* LocationView.swift */,
 				7ADC62F3285A5EC800A95952 /* BasketView.swift */,
-				7ADC62F5285A5EEC00A95952 /* AccountView.swift */,
+				7ADC62F5285A5EEC00A95952 /* AddressView.swift */,
 				7ADC62BF285A5D4200A95952 /* FastFoodApp.xcdatamodeld */,
 				7ADC62C7285A5D7500A95952 /* DataController.swift */,
 				7ADC62BA285A5D4200A95952 /* Preview Content */,
@@ -191,7 +191,7 @@
 				7ADC6300285A60E300A95952 /* Category+CoreDataClass.swift in Sources */,
 				7ADC62F2285A5EBC00A95952 /* LocationView.swift in Sources */,
 				7ADC62EC285A5E8800A95952 /* MenuView.swift in Sources */,
-				7ADC62F6285A5EEC00A95952 /* AccountView.swift in Sources */,
+				7ADC62F6285A5EEC00A95952 /* AddressView.swift in Sources */,
 				7ADC6301285A60E300A95952 /* Category+CoreDataProperties.swift in Sources */,
 				7ADC62FE285A60E300A95952 /* Product+CoreDataClass.swift in Sources */,
 				7ADC62B5285A5D4000A95952 /* FastFoodAppApp.swift in Sources */,

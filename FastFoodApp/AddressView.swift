@@ -1,5 +1,5 @@
 //
-//  AccountView.swift
+//  AddressView.swift
 //  FastFoodApp
 //
 //  Created by Adrian Szymczyk on 14/06/2022.
@@ -11,53 +11,21 @@ struct Address{
     var street: String = ""
     var homeNumber: String = ""
     var flatNumber: String = ""
-    var comments: String = ""
 }
 
-struct AccountView: View {
+struct AddressView: View {
     init(){
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Arial-BoldMT", size: 22)!]
     }
     @State var emailAddress: String = ""
     @State var password: String = ""
     @State var phoneNumber: String = ""
-    @State var addres: Address = Address(street: "", homeNumber: "", flatNumber: "", comments: "")
+    @State var addres: Address = Address(street: "", homeNumber: "", flatNumber: "")
     var body: some View {
         ZStack{
             Color("BackgroundColor").ignoresSafeArea(.all)
             VStack{
-                TextField("Podaj adres emial", text: $emailAddress)
-                    .padding()
-                    .background(Color("AccountColor"))
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color("Brown"), lineWidth: 2))
-                    .padding(.horizontal, 40)
-                    .padding(.top, 20)
-                TextField("Podaj hasło", text: $password)
-                    .padding()
-                    .background(Color("AccountColor"))
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color("Brown"), lineWidth: 2))
-                    .padding(.horizontal, 40)
-                    .padding(.top, 20)
-                Text("Co najmniej 8 znaków, max 64, musi zawierać duże litery, małe litery i cyfry")
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 39.0)
-                    .font(.system(size: 16))
-                    .frame(height:40)
-                TextField("Podaj numer telefonu", text: $phoneNumber)
-                    .padding()
-                    .background(Color("AccountColor"))
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color("Brown"), lineWidth: 2))
-                    .padding(.horizontal, 40)
-                    .padding(.top, 20)
+                Spacer()
                 VStack{
                     Text("Adres")
                         .font(.system(size: 20))
@@ -89,24 +57,24 @@ struct AccountView: View {
                                 .stroke(Color("Brown"), lineWidth: 2))
                         .padding(.horizontal, 40)
                         .padding(.top, 10)
-                    TextField("Informacje dodatkowe", text: $addres.comments)
-                        .frame(height: 80)
-                        .padding()
-                        .background(Color("AddressColor"))
-                        .cornerRadius(20)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color("Brown"), lineWidth: 2))
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 10)
+                        .padding(.bottom, 20)
                 }
                 .background(Color("AccountColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding([.top, .leading, .trailing], 30.0)
+                TextField("Podaj numer telefonu", text: $phoneNumber)
+                    .padding()
+                    .background(Color("AccountColor"))
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color("Brown"), lineWidth: 2))
+                    .padding(.horizontal, 70)
+                    .padding(.top, 20)
                 Button{
                     print("Sranie zyganie")
                 } label: {
-                    Text("Załóż konto")
+                    Text("Podsumowanie")
                         .fontWeight(.bold)
                         .foregroundColor(Color.black)
                         .padding()
@@ -123,8 +91,8 @@ struct AccountView: View {
     }
 }
 
-struct AccountView_Previews: PreviewProvider {
+struct AddressView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        AddressView()
     }
 }

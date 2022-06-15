@@ -116,24 +116,6 @@ struct MainMenuView: View {
                                         .multilineTextAlignment(.center)
                                         .offset(y:50)
                                 }})
-                            NavigationLink(
-                                destination: AccountView(),
-                                label: {
-                                ZStack{
-                                    Image("icon_account")
-                                        .resizable()
-                                        .frame(width: 140, height: 140)
-                                        .cornerRadius(20)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .stroke(Color("Brown"), lineWidth: 2))
-                                    Text("KONTO")
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.black)
-                                        .multilineTextAlignment(.center)
-                                        .offset(y:50)
-                                }})
                         }
                     }
                 }

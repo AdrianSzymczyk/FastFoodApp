@@ -41,6 +41,19 @@ struct BasketView: View {
                     .listRowBackground(Color("BrightGreenColor"))
                 }
                 .navigationBarTitle(Text("Koszyk"))
+                NavigationLink(
+                    destination: AddressView(),
+                    label: {
+                    ZStack{
+                        Text("Wprowadź adres")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 180, height: 70)
+                            .background(Color("Brown"))
+                            .cornerRadius(20)
+                    }})
             }
         }
     }
