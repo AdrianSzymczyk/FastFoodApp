@@ -14,29 +14,33 @@ struct BasketView: View {
     }
     
     @Environment(\.managedObjectContext) private var viewContext
-//    @FetchRequest(sortDescriptors: [], animation: .default) var products: FetchedResults<Product>
-//    @FetchRequest(sortDescriptors: [], animation: .default) var baskets: FetchedResults<Basket>
+    @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Product.name, ascending: true)], animation: .default)
+    private var products: FetchedResults<Product>
+    @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    private var categories: FetchedResults<Category>
 
     
     var body: some View {
         ZStack{
             Color("BackgroundColor").ignoresSafeArea(.all)
             VStack{
-//                Text("Koszyk")
-//                List {
-//                    ForEach(baskets, id: \.self) { baskets in
-//                            ForEach(baskets.productArray, id: \.self) { product in
-//                                VStack(alignment: .leading){
-//                                    Text(product.name!)
-//                                    Text("\(product.price, specifier: "%.2f")zł")
-//
-//                                }
-//                            }
+                List {
+                    ForEach(categories, id: \.self) { category in
+                        Section(category.name!){
+                            ForEach(category.productArray, id: \.self) { product in
+                                VStack(alignment: .leading){
+                                    Text(product.name!)
+                                    Text("\(product.price, specifier: "%.2f")zł")
+
+                                }
+                            }
 //                            .onDelete(perform: self.deleteProduct)
-//                    }
-//                    .listRowBackground(Color("BrightGreenColor"))
-//                }
-//                .navigationBarTitle(Text("Koszyk"))
+
+                        }
+                    }
+                    .listRowBackground(Color("BrightGreenColor"))
+                }
+                .navigationBarTitle(Text("Koszyk"))
             }
         }
     }

@@ -11,13 +11,7 @@ import CoreData
 struct BurgerView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-//    @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Product.name, ascending: true)], animation: .default)
-//    private var products: FetchedResults<Product>
-//    @FetchRequest(
-//        entity: Product.entity(),
-//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
-//    ) var products: FetchedResults<Product>
-    
+    @ObservedObject var categoryInfo: Category
     @Binding var burgerInfo: Burger
     var body: some View {
         ZStack{
@@ -39,7 +33,7 @@ struct BurgerView: View {
                     .padding(.top)
                 Button{
                     print("Burger dodany do koszyka")
-//                    addToBasket()
+                    addToBasket()
                 } label: {
                     Text("Dodaj do koszyka")
                         .padding(20)
@@ -54,26 +48,24 @@ struct BurgerView: View {
             }
         }
     }
-//    private func addToBasket() {
-//        let newBasket = Basket(context: viewContext)
-//        newBasket.name = "Klient"
-//        newBasket.product = Product(context: viewContext)
-//        newBasket.product?.name = burgerInfo.name
-//        newBasket.product?.descriptionn = burgerInfo.descriptionn
-//        newBasket.product?.img = burgerInfo.img
-//        newBasket.product?.price = burgerInfo.price
-//        do {
-//            try viewContext.save()
-//            print("Product added")
-//            viewContext.delete(burgerInfo)
-//        } catch {
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//    }
+    private func addToBasket() {
+        let newProduct = Product(context: viewContext)
+        newProduct.name = burgerInfo.name
+        newProduct.descriptionn = burgerInfo.description
+        newProduct.img = burgerInfo.burgerImg
+        newProduct.price = burgerInfo.price
+        newProduct.category = categoryInfo
+        do {
+            try viewContext.save()
+            print("Product added")
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
 
 struct BurgerView_Previews: PreviewProvider {
     static var previews: some View {
-        BurgerView(burgerInfo: .constant(Burger(name: "", description: "", burgerImg: "", price: 0, category: "")))    }
+        BurgerView(categoryInfo: Category(), burgerInfo: .constant(Burger(name: "", description: "", burgerImg: "", price: 0)))}
 }

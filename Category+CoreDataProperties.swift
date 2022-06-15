@@ -17,6 +17,7 @@ extension Category {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var img: String?
     @NSManaged public var product: NSSet?
     
     public var productArray: [Product] {

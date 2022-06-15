@@ -12,21 +12,21 @@ struct Burger{
     var description: String
     var burgerImg: String
     var price: Double
-    var category: String
 }
 
 struct BurgersView: View {
-    init(){
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Arial-BoldMT", size: 22)!]
-        UITableView.appearance().backgroundColor = UIColor(Color("BackgroundColor"))
-    }
+    @ObservedObject var categoryInfo: Category
     @State var burgers: [Burger] =
-    [Burger(name: "Burger z kurczakiem", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ", burgerImg: "burger_chicken", price: 26.50, category: "Burger"),
-     Burger(name: "Burger z falafelem", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_falafel", price: 27.99, category: "Burger"),
-     Burger(name: "Burger z grzybami", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_mushroom", price: 32.00, category: "Burger"),
-     Burger(name: "Burger rybny", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_fish", price: 25.99, category: "Burger")]
-    @State private var selectedProduct: Burger = Burger(name: "", description: "", burgerImg: "", price: 0, category: "")
+    [Burger(name: "Burger z kurczakiem", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ", burgerImg: "burger_chicken", price: 26.50),
+     Burger(name: "Burger z falafelem", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_falafel", price: 27.99),
+     Burger(name: "Burger z grzybami", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_mushroom", price: 32.00),
+     Burger(name: "Burger rybny", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", burgerImg: "burger_fish", price: 25.99)]
+    @State private var selectedProduct: Burger = Burger(name: "", description: "", burgerImg: "", price: 0)
+    
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
+    private var categories: FetchedResults<Category>
 
     var body: some View {
         ZStack{
@@ -34,7 +34,7 @@ struct BurgersView: View {
             VStack{
                 List{
                     ForEach($burgers, id: \.name){$burger in
-                        NavigationLink(destination: BurgerView(burgerInfo: $burger))
+                        NavigationLink(destination: BurgerView(categoryInfo: categoryInfo, burgerInfo: $burger))
                         {
                             HStack{
                                 Image(burger.burgerImg)
@@ -54,7 +54,7 @@ struct BurgersView: View {
                         .swipeActions(edge: .leading, allowsFullSwipe: false){
                             Button {
                                 selectedProduct = burger
-//                                addToBasket()
+                                addToBasket()
                                 print("Dodawanie do koszyka")
                             } label: {
                                 Label("Dodaj", systemImage: "plus.circle")
@@ -68,26 +68,25 @@ struct BurgersView: View {
             }
         }
     }
-//    private func addToBasket() {
-//        let newProduct = Product(context: viewContext)
-//        newProduct.name = selectedProduct.name
-//        newProduct.descriptionn = selectedProduct.description
-//        newProduct.img = selectedProduct.burgerImg
-//        newProduct.price = selectedProduct.price
-//        do {
-//            try viewContext.save()
-//            print("Product added")
-////            viewContext.delete(selectedProduct!)
-//
-//        } catch {
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//    }
+    private func addToBasket() {
+        let newProduct = Product(context: viewContext)
+        newProduct.name = selectedProduct.name
+        newProduct.descriptionn = selectedProduct.description
+        newProduct.img = selectedProduct.burgerImg
+        newProduct.price = selectedProduct.price
+        newProduct.category = categoryInfo
+        do {
+            try viewContext.save()
+            print("Product added")
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
 
 struct BurgersView_Previews: PreviewProvider {
     static var previews: some View {
-        BurgersView()
+        BurgersView(categoryInfo: Category())
     }
 }
