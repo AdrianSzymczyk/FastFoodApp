@@ -18,10 +18,6 @@ import CoreData
 struct AddressView: View {
     init(){
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Arial-BoldMT", size: 22)!]
-//        let request: NSFetchRequest<Address> = Address.fetchRequest()
-//        request.fetchLimit = 1
-//
-//        _addr = FetchRequest(fetchRequest: request)
     }
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Address.street, ascending: true)], animation: .default)
@@ -36,6 +32,10 @@ struct AddressView: View {
     @State var flatNumber: String = ""
     @State var city: String = ""
     @State var phoneNumber: String = ""
+    //validation/error
+    @State var error1: Bool = false
+    @State var warning: String = ""
+    @State var correctData: Bool = false
     
     
     var body: some View {
@@ -97,24 +97,24 @@ struct AddressView: View {
                             .stroke(Color("Brown"), lineWidth: 2))
                     .padding(.horizontal, 70)
                     .padding(.vertical, 20)
-//                Button{
-//                    print("Sranie zyganie")
-//                } label: {
-//                    Text("Podsumowanie")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(Color.black)
-//                        .padding()
-//                        .frame(width: 300)
-//                        .background(Color("BrightGreenColor"))
-//                        .cornerRadius(30)
-//                        .font(.title2)
-//                        .padding(.top, 20)
-//                }
-                NavigationLink(
-                    destination: SummaryView(),
-                    label: {
-                    ZStack{
-                        Text("Podsumowanie")
+                if(!correctData){
+                    Button{
+                        error1 = checkInput(street: street, houseNumber: houseNumber, flatNumber: flatNumber, city: city, phoneNumber: phoneNumber)
+                        print(error1)
+                        if(error1){
+                            warning = "Błędne dane!!"
+                        }else{
+                            warning = ""
+                            correctData = true
+                            addAddress()
+                            print(addr)
+
+                        }
+                        print("Data: \(street) \(houseNumber)/\(flatNumber), \(city)")
+                        print("Phone number: \(phoneNumber)")
+                        print("Warining: \(warning)")
+                    } label:{
+                        Text("Sprawdź dane")
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
@@ -122,14 +122,41 @@ struct AddressView: View {
                             .frame(width: 180, height: 70)
                             .background(Color("Brown"))
                             .cornerRadius(20)
-                    }})
-                    .simultaneousGesture(TapGesture().onEnded{
-                        addAddress()
-                        print(addr)
-                    })
+                    }
+                }else{
+                    NavigationLink(
+                        destination: SummaryView(),
+                        label: {
+                        ZStack{
+                            Text("Podsumowanie")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 180, height: 70)
+                                .background(Color("Brown"))
+                                .cornerRadius(20)
+                        }})
+
+                }
+                Text(warning)
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.red)
+                    .padding()
+                    .frame(width: 300)
+                    .cornerRadius(30)
+                    .font(.title)
+                    .padding(.top, 20)
                 Spacer()
             }
             .navigationBarTitle(Text("Adres dostawy"), displayMode: .inline)
+        }
+    }
+    public func checkInput(street: String, houseNumber: String, flatNumber: String, city: String, phoneNumber: String) -> Bool{
+        if(street.isEmpty || houseNumber.isEmpty || Int(flatNumber) == nil || city.isEmpty || phoneNumber.isEmpty){
+            return true
+        }else{
+            return false
         }
     }
     private func addAddress() {
