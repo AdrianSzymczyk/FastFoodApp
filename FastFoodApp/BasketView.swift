@@ -34,8 +34,7 @@ struct BasketView: View {
 
                                 }
                             }
-//                            .onDelete(perform: self.deleteProduct)
-
+                            .onDelete(perform: self.deleteProduct)
                         }
                     }
                     .listRowBackground(Color("BrightGreenColor"))
@@ -58,16 +57,16 @@ struct BasketView: View {
         }
     }
     
-//    private func deleteProduct(offsets: IndexSet) { withAnimation {
-//        offsets.map { products[$0] }.forEach(viewContext.delete)
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//        }
-//    }
+    private func deleteProduct(offsets: IndexSet) { withAnimation {
+        offsets.map { products[$0] }.forEach(viewContext.delete)
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        }
+    }
 }
 
 struct BasketView_Previews: PreviewProvider {

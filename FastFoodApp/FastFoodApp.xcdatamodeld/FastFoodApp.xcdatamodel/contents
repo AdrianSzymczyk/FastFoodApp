@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Address" representedClassName=".Address" syncable="YES">
+        <attribute name="city" attributeType="String"/>
+        <attribute name="flatNumber" optional="YES" attributeType="String"/>
+        <attribute name="houseNumber" attributeType="String"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="street" attributeType="String"/>
+        <relationship name="basket" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Product" inverseName="address" inverseEntity="Product"/>
+    </entity>
     <entity name="Category" representedClassName=".Category" syncable="YES">
         <attribute name="img" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -10,10 +18,12 @@
         <attribute name="img" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="basket" inverseEntity="Address"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="product" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="Category" positionX="4905.897766113281" positionY="-1552.948608398438" width="128" height="73"/>
-        <element name="Product" positionX="4595.175048828125" positionY="-1647.016326904297" width="128" height="103"/>
+        <element name="Category" positionX="4905.897766113281" positionY="-1552.948608398438" width="128" height="88"/>
+        <element name="Product" positionX="4595.175048828125" positionY="-1647.016326904297" width="128" height="133"/>
+        <element name="Address" positionX="4354.638305664062" positionY="-1596.956665039062" width="128" height="133"/>
     </elements>
 </model>

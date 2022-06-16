@@ -53,7 +53,8 @@ struct MainMenuView: View {
                                             .multilineTextAlignment(.center)
                                             .offset(y:50)
 
-                                    }}).simultaneousGesture(TapGesture().onEnded{
+                                    }})
+                                    .simultaneousGesture(TapGesture().onEnded{
                                         addCategories()
                                         print(categories)
                                     })

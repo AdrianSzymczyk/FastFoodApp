@@ -16,20 +16,10 @@ struct MenuView: View {
     init(){
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Arial-BoldMT", size: 22)!]
     }
-    
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors:  [NSSortDescriptor(keyPath: \Category.name, ascending: true)], animation: .default)
     private var categoriesD: FetchedResults<Category>
 
-    
-//    @State var categories :[Categoryy] =
-//    [Categoryy(name: "Burgery", CategoryyImg: "menu_burger"),
-//    Categoryy(name: "Burrito", CategoryyImg: "menu_burrito"),
-//    Categoryy(name: "Tacos", CategoryyImg: "menu_taco"),
-//    Categoryy(name: "Hot-dogi", CategoryyImg: "menu_hotdog"),
-//    Categoryy(name: "Kanapki", CategoryyImg: "menu_sandwich")
-//    ]
-    @State var selectedCategory: Category?
     
     var body: some View {
         ZStack{
