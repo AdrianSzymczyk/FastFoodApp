@@ -34,27 +34,39 @@ struct BasketView: View {
 
                                 }
                             }
-//                            .onDelete(perform: self.deleteProduct)
-
+                            .onDelete(perform: self.deleteProduct)
                         }
                     }
                     .listRowBackground(Color("BrightGreenColor"))
                 }
                 .navigationBarTitle(Text("Koszyk"))
+                NavigationLink(
+                    destination: AddressView(),
+                    label: {
+                    ZStack{
+                        Text("Wprowadź adres")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 180, height: 70)
+                            .background(Color("Brown"))
+                            .cornerRadius(20)
+                    }})
             }
         }
     }
     
-//    private func deleteProduct(offsets: IndexSet) { withAnimation {
-//        offsets.map { products[$0] }.forEach(viewContext.delete)
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//        }
-//    }
+    private func deleteProduct(offsets: IndexSet) { withAnimation {
+        offsets.map { products[$0] }.forEach(viewContext.delete)
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        }
+    }
 }
 
 struct BasketView_Previews: PreviewProvider {

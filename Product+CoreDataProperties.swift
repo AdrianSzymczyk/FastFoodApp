@@ -2,7 +2,7 @@
 //  Product+CoreDataProperties.swift
 //  FastFoodApp
 //
-//  Created by Adrian Szymczyk on 15/06/2022.
+//  Created by Adrian Szymczyk on 16/06/2022.
 //
 //
 
@@ -21,6 +21,7 @@ extension Product {
     @NSManaged public var img: String?
     @NSManaged public var price: Double
     @NSManaged public var category: Category?
+    @NSManaged public var address: Address?
 
 }
 
